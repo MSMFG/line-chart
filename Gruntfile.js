@@ -40,6 +40,18 @@ module.exports = function(grunt) {
         singleRun: true,
         autoWatch: false,
         browsers: ['Firefox']
+      },
+
+      travis: {
+        singleRun: true,
+        autoWatch: false,
+        browsers: ['Firefox'],
+        reporters: ['json', 'coverage'],
+        options: {
+          jsonReporter: {
+            outputFile: 'test/unit/test-results.json'
+          }
+        }
       }
     },
 
@@ -120,7 +132,7 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('travis', ['default', 'shell:visual']);
-  grunt.registerTask('visual', ['concat', 'coffeelint', 'coffee', 'uglify', 'shell:visual']);
-  grunt.registerTask('default', ['concat', 'coffeelint', 'coffee', 'uglify', 'karma:continuous']);
+  grunt.registerTask('travis', ['build', 'karma:travis', 'shell:visual']);
+  grunt.registerTask('default', ['build', 'karma:continuous']);
+  grunt.registerTask('build', ['concat', 'coffeelint', 'coffee', 'uglify']);
 };
