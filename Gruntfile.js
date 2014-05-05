@@ -46,12 +46,20 @@ module.exports = function(grunt) {
         singleRun: true,
         autoWatch: false,
         browsers: ['Firefox'],
-        reporters: ['json', 'coverage'],
+        reporters: ['specjson', 'coverage'],
         options: {
-          jsonReporter: {
+          specjsonReporter: {
             outputFile: 'test/unit/test-results.json'
           }
         }
+      }
+    },
+
+    pipe: {
+      unittest: {
+        files: {
+          'tmp/foo': 'test/fixtures/foo'
+        },
       }
     },
 
